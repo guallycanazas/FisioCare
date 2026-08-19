@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./frontend/public/assets/fisiocare-logo.png" alt="Logo de FisioCare" width="128" />
+  <img src="./frontend/src/public/assets/fisiocare-logo.png" alt="Logo de FisioCare" width="128" />
   <h1>FisioCare</h1>
   <p><strong>Recuperación con propósito.</strong><br>Plataforma web para gestionar servicios, pacientes y reservas de fisioterapia.</p>
 
@@ -96,7 +96,7 @@ FisioCare/
 ├── frontend/
 │   ├── src/app/                # Landing, auth, reservas y dashboards
 │   ├── src/public/assets/      # Imágenes de la experiencia web
-│   ├── public/assets/          # Logo PNG de FisioCare
+│   ├── src/public/assets/      # Logo e imágenes de FisioCare
 │   ├── nginx.conf              # Proxy frontend → backend
 │   └── Dockerfile
 ├── compose.yaml                # Servicios Docker
