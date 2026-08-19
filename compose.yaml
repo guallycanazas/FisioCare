@@ -26,7 +26,7 @@ services:
       TZ: America/Lima
       JAVA_TOOL_OPTIONS: -Duser.timezone=America/Lima
       JWT_SECRET: c2VjdXJlLWRldi1qd3Qta2V5LXRoYXQtaXMtMzItYnl0ZXMtbG9uZw==
-      FRONTEND_URL: http://localhost:4200
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:4200}
       GOOGLE_OAUTH_ENABLED: ${GOOGLE_OAUTH_ENABLED:-false}
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
