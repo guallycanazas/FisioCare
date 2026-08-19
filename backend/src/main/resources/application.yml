@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: reservas-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/reservas}
+    username: ${DB_USERNAME:reservas}
+    password: ${DB_PASSWORD:reservas_dev}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: ${PORT:8080}
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:c2VjdXJlLWRldi1qd3Qta2V5LXRoYXQtaXMtMzItYnl0ZXMtbG9uZw==}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+app:
+  frontend-url: ${FRONTEND_URL:http://localhost:4200}
+  oauth2:
+    google:
+      enabled: ${GOOGLE_OAUTH_ENABLED:false}
+      client-id: ${GOOGLE_CLIENT_ID:}
+      client-secret: ${GOOGLE_CLIENT_SECRET:}

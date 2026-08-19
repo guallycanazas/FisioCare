@@ -1,0 +1,66 @@
+:host { display: block; min-height: 100vh; }
+.booking-page { min-height: 100vh; background: #f8f9fd; color: #242340; }
+.shell { width: min(1120px, calc(100% - 3rem)); margin: 0 auto; }
+.booking-header { display: flex; align-items: center; justify-content: space-between; min-height: 84px; }
+.header-right { display: flex; align-items: center; gap: 1.2rem; }
+.header-right a, .logout-link { border: 0; background: transparent; color: #5f6073; font: inherit; font-size: .76rem; font-weight: 900; text-decoration: none; cursor: pointer; }
+.header-right a:hover, .logout-link:hover { color: #5c58d8; }
+.header-right a span { color: #5c58d8; font-size: 1rem; }
+.booking-main { padding: 4rem 0 6rem; }
+.booking-top { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 3rem; }
+.eyebrow { margin-bottom: .75rem; color: #5c58d8; font-size: .7rem; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
+h1, h2 { margin-top: 0; color: #28264c; letter-spacing: -.065em; }
+h1 { margin-bottom: 1rem; font-size: clamp(3.2rem, 6vw, 5.8rem); line-height: .88; }
+h1 em, h2 em { color: #5c58d8; font-family: Georgia, serif; font-weight: 400; }
+.booking-top > div:first-child > p { max-width: 430px; margin: 0; color: #7b7d8f; line-height: 1.6; }
+.booking-steps { display: flex; align-items: center; gap: .6rem; padding-bottom: .5rem; }
+.booking-steps div { display: grid; gap: .35rem; text-align: center; }
+.booking-steps span { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: #e9e9f7; color: #838499; font-size: .68rem; font-weight: 900; }
+.booking-steps .active span { background: #292565; color: white; }
+.booking-steps small { color: #858798; font-size: .62rem; font-weight: 800; }
+.booking-steps i { width: 2.2rem; height: 1px; background: #d9d9e7; }
+.booking-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); gap: 1rem; align-items: start; }
+.booking-form-card, .summary-card, .success-card { border: 1px solid #e1e2ec; border-radius: 1.2rem; background: white; box-shadow: 0 .8rem 2rem rgba(41,37,101,.05); }
+.booking-form-card { padding: 1.7rem; }
+.card-header { display: flex; align-items: start; justify-content: space-between; margin-bottom: 1.4rem; }
+.card-header h2 { margin-bottom: 0; font-size: 1.7rem; }
+.card-symbol { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: .65rem; background: #eeeefe; color: #5c58d8; }
+.service-options { display: grid; gap: .65rem; }
+.service-option { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .8rem; width: 100%; padding: 1rem; border: 1px solid #e5e5ee; border-radius: .85rem; background: white; color: #3a3858; text-align: left; cursor: pointer; }
+.service-option:hover, .service-option.selected { border-color: #7873e4; background: #f7f7ff; }
+.option-number { color: #5c58d8; font-family: Georgia, serif; font-size: 1.1rem; }
+.option-content { display: grid; gap: .22rem; }
+.option-content strong { font-size: .78rem; }
+.option-content small { color: #888a9b; font-size: .68rem; line-height: 1.35; }
+.option-content em { color: #5c58d8; font-size: .65rem; font-style: normal; font-weight: 900; }
+.option-check { display: grid; place-items: center; width: 1.3rem; height: 1.3rem; border: 1px solid #d8d8e5; border-radius: 50%; color: transparent; font-size: .68rem; }
+.selected .option-check { border-color: #5c58d8; background: #5c58d8; color: white; }
+.date-block { display: grid; gap: .7rem; margin-top: 1.4rem; padding-top: 1.4rem; border-top: 1px solid #eeeeF5; }
+.date-block label { display: grid; gap: .25rem; color: #363451; font-size: .76rem; font-weight: 900; }
+.date-block label small { color: #8b8d9d; font-size: .68rem; font-weight: 500; }
+input { min-height: 3.1rem; border: 1px solid #dedfea; border-radius: .65rem; padding: .75rem .85rem; background: #fbfbfe; color: #2d2b4e; font: inherit; }
+input:focus { border-color: #7772e5; outline: 0; box-shadow: 0 0 0 3px #e6e5ff; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: .75rem; min-height: 3.2rem; border: 0; border-radius: .7rem; background: #292565; color: white; font: inherit; font-size: .8rem; font-weight: 900; cursor: pointer; text-decoration: none; }
+.button:hover { background: #5c58d8; }
+.button span { font-size: 1.1rem; }
+.full { width: 100%; margin-top: 1.3rem; }
+.form-message { margin: 1rem 0 0; padding: .7rem; border-radius: .5rem; background: #fff0ef; color: #a54a47; font-size: .75rem; }
+.login-hint { margin: .8rem 0 0; color: #999bab; font-size: .66rem; text-align: center; }
+.booking-summary { display: grid; gap: 1rem; }
+.summary-visual { position: relative; min-height: 240px; overflow: hidden; border-radius: 1.2rem; background: #deddff; }
+.summary-visual img { width: 100%; height: 100%; min-height: 240px; object-fit: cover; object-position: center 35%; }
+.summary-visual::after { position: absolute; inset: 0; content: ''; background: linear-gradient(180deg, transparent 25%, rgba(41,37,101,.72)); }
+.summary-visual span { position: absolute; left: 1.2rem; bottom: 1.1rem; z-index: 1; color: white; font-size: 1.25rem; font-weight: 900; letter-spacing: -.04em; line-height: 1; }
+.summary-visual em { color: #c6c5ff; font-family: Georgia, serif; font-weight: 400; }
+.summary-card { padding: 1.3rem; }
+.summary-row { display: grid; gap: .25rem; padding: .9rem 0; border-bottom: 1px solid #eeeeF5; }
+.summary-row:last-child { padding-bottom: 0; border-bottom: 0; }
+.summary-row span { color: #9698a7; font-size: .66rem; }
+.summary-row strong { color: #383653; font-size: .77rem; }
+.success-card { display: grid; justify-items: start; max-width: 610px; margin: 2rem auto; padding: 3rem; }
+.success-icon { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; margin-bottom: 1.5rem; border-radius: 50%; background: #def7e8; color: #177341; font-size: 1.5rem; font-weight: 900; }
+.success-card h2 { margin-bottom: 1rem; font-size: clamp(2.8rem, 5vw, 4.5rem); line-height: .9; }
+.success-card > p { max-width: 370px; margin-bottom: 1.7rem; color: #7b7d8f; font-size: .85rem; line-height: 1.6; }
+.success-card > div:last-child { display: flex; align-items: center; gap: 1.25rem; }
+.plain-link { color: #514e9a; font-size: .75rem; font-weight: 900; text-decoration: none; }
+@media (max-width: 800px) { .shell { width: min(100% - 2rem, 620px); } .booking-main { padding-top: 2.5rem; } .booking-top { display: grid; } .booking-steps { justify-content: start; } .booking-layout { grid-template-columns: 1fr; } .summary-visual { min-height: 200px; } }

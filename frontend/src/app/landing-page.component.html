@@ -1,0 +1,59 @@
+<div class="landing-page">
+  <header class="site-header shell">
+    <app-brand-logo></app-brand-logo>
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#metodo">Nuestro método</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a class="text-action" [routerLink]="auth.currentUser ? (auth.currentUser.role === 'ADMIN' ? '/admin' : '/mi-cuenta') : '/login'">{{ auth.currentUser ? 'Mi cuenta' : 'Iniciar sesión' }}</a>
+      <a class="button button-small" routerLink="/reservar">Reservar cita <span>↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section shell">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot">✦</span> Fisioterapia para volver a ti</div>
+        <h1>Muévete mejor.<br><em>Vive más.</em></h1>
+        <p class="hero-lead">Atención fisioterapéutica personalizada para recuperar movilidad, aliviar molestias y volver a hacer lo que disfrutas.</p>
+        <div class="hero-actions">
+          <a class="button" routerLink="/reservar">Reserva tu cita <span>↗</span></a>
+          <a class="plain-link" href="#servicios">Explorar servicios <span>↓</span></a>
+        </div>
+        <div class="hero-proof"><span class="proof-avatars"><i>AM</i><i>JR</i><i>LC</i></span><span><strong>+120 pacientes</strong><small>ya volvieron a moverse</small></span></div>
+      </div>
+      <div class="hero-media">
+        <img src="/assets/fisiocare-hero.png" alt="Fisioterapeuta acompañando a un paciente durante su recuperación">
+        <div class="media-label"><span class="label-icon">✦</span><span><strong>Recuperación con propósito</strong><small>Planes pensados para ti</small></span></div>
+        <span class="media-tag">Atención humana · Resultados reales</span>
+      </div>
+    </section>
+
+    <section class="trust-strip shell">
+      <div><span>01</span><strong>Evaluación con propósito</strong><small>Entendemos tu punto de partida.</small></div>
+      <div><span>02</span><strong>Planes a tu medida</strong><small>Avanzas con objetivos claros.</small></div>
+      <div><span>03</span><strong>Acompañamiento real</strong><small>No estás solo en el proceso.</small></div>
+    </section>
+
+    <section class="content-section shell" id="servicios">
+      <div class="section-intro"><div><div class="eyebrow">Lo que hacemos</div><h2>Tu recuperación<br><em>empieza aquí.</em></h2></div><p>Sesiones pensadas para tus objetivos, tu cuerpo y tu ritmo de vida.</p></div>
+      <div class="service-cards">
+        <a class="service-card" routerLink="/reservar" *ngFor="let service of services; let i = index">
+          <span class="service-index">0{{ i + 1 }}</span><span class="service-arrow">↗</span>
+          <div><h3>{{ service.name }}</h3><p>{{ service.description }}</p><small>{{ service.durationMinutes }} minutos · Ver disponibilidad</small></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="method-section shell" id="metodo">
+      <div class="method-image"><img src="/assets/fisiocare-mobility.png" alt="Paciente trabajando su equilibrio y movilidad"><span>Movimiento · Confianza</span></div>
+      <div class="method-copy"><div class="eyebrow">Nuestro método</div><h2>No se trata solo de mejorar.<br><em>Se trata de volver.</em></h2><p>Diseñamos cada sesión para que el progreso se note en tu vida diaria: caminar, entrenar, descansar y disfrutar sin miedo.</p><div class="method-list"><div><b>01</b><span><strong>Te escuchamos</strong><small>Conocemos tu historia y lo que quieres recuperar.</small></span></div><div><b>02</b><span><strong>Te acompañamos</strong><small>Trabajamos con técnicas y ejercicios que entiendes.</small></span></div><div><b>03</b><span><strong>Te devolvemos confianza</strong><small>Medimos avances para que vuelvas a moverte con seguridad.</small></span></div></div><a class="plain-link" routerLink="/reservar">Conoce tu plan de recuperación <span>↗</span></a></div>
+    </section>
+
+    <section class="cta-section shell" id="contacto"><div><div class="eyebrow light">Tu siguiente paso</div><h2>Empieza a sentir<br><em>la diferencia.</em></h2></div><div><p>Agenda tu primera sesión y dale a tu recuperación la atención que merece.</p><a class="button button-light" routerLink="/reservar">Reservar mi cita <span>↗</span></a></div></section>
+  </main>
+
+  <footer class="site-footer shell"><app-brand-logo></app-brand-logo><p>Fisioterapia y rehabilitación para una vida en movimiento.</p><span>© 2026 FisioCare</span></footer>
+</div>

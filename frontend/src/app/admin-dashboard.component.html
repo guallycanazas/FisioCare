@@ -1,0 +1,66 @@
+<div class="admin-page">
+  <header class="admin-header shell">
+    <app-brand-logo></app-brand-logo>
+    <nav>
+      <a class="active" routerLink="/admin">Agenda</a>
+      <a href="#servicios">Servicios</a>
+      <a routerLink="/">Ver sitio público ↗</a>
+    </nav>
+    <div class="admin-profile">
+      <span class="avatar">{{ user?.name?.charAt(0) }}</span>
+      <span><strong>{{ user?.name }}</strong><small>Administrador</small></span>
+      <button type="button" (click)="logout()">Salir</button>
+    </div>
+  </header>
+
+  <main class="admin-main shell">
+    <section class="admin-welcome">
+      <div><div class="eyebrow">Panel de control · FisioCare</div><h1>Agenda de pacientes.</h1><p>Revisa solicitudes, confirma horarios y mantén tu atención organizada.</p></div>
+      <div class="live-badge"><i></i> Sistema operativo</div>
+    </section>
+    <p class="notice" *ngIf="message">{{ message }}</p>
+    <div class="admin-stats">
+      <article><small>Total</small><strong>{{ reservations.length }}</strong><span>reservas registradas</span></article>
+      <article class="pending"><small>Por revisar</small><strong>{{ pendingCount }}</strong><span>requieren una respuesta</span></article>
+      <article class="confirmed"><small>Confirmadas</small><strong>{{ confirmedCount }}</strong><span>sesiones agendadas</span></article>
+      <article class="cancelled"><small>Canceladas</small><strong>{{ cancelledCount }}</strong><span>fuera de agenda</span></article>
+    </div>
+
+    <section class="agenda-section">
+      <div class="section-top"><div><div class="eyebrow">Operación diaria</div><h2>Reservas</h2></div><div class="agenda-tools"><label class="search-box"><span>⌕</span><input [(ngModel)]="search" placeholder="Buscar paciente o servicio"></label></div></div>
+      <div class="filter-bar">
+        <button type="button" [class.active]="filter === 'ALL'" (click)="setFilter('ALL')">Todas <b>{{ reservations.length }}</b></button>
+        <button type="button" [class.active]="filter === 'PENDING'" (click)="setFilter('PENDING')">Pendientes <b>{{ pendingCount }}</b></button>
+        <button type="button" [class.active]="filter === 'CONFIRMED'" (click)="setFilter('CONFIRMED')">Confirmadas <b>{{ confirmedCount }}</b></button>
+        <button type="button" [class.active]="filter === 'CANCELLED'" (click)="setFilter('CANCELLED')">Canceladas <b>{{ cancelledCount }}</b></button>
+      </div>
+      <div class="admin-table" *ngIf="filteredReservations.length; else noReservations">
+        <article class="admin-row" *ngFor="let reservation of filteredReservations">
+          <div class="admin-date"><strong>{{ reservation.startsAt | date:'dd' }}</strong><span>{{ reservation.startsAt | date:'MMM' }}</span></div>
+          <div class="patient-info"><strong>{{ reservation.customerName }}</strong><small>{{ reservation.customerEmail }}</small></div>
+          <div class="appointment-info"><strong>{{ reservation.service.name }}</strong><small>{{ reservation.startsAt | date:'EEEE dd MMMM, h:mm a' }} · {{ reservation.service.durationMinutes }} min</small></div>
+          <span class="status" [class.confirmed]="reservation.status === 'CONFIRMED'" [class.cancelled]="reservation.status === 'CANCELLED'"><i></i>{{ statusLabel(reservation.status) }}</span>
+          <div class="row-actions" *ngIf="confirmDeleteId !== reservation.id"><button class="confirm" *ngIf="reservation.status === 'PENDING'" type="button" (click)="updateStatus(reservation, 'CONFIRMED')">Confirmar</button><button class="reject" *ngIf="reservation.status === 'PENDING'" type="button" (click)="updateStatus(reservation, 'CANCELLED')">Rechazar</button><button class="delete" type="button" (click)="askDelete(reservation)">Eliminar</button></div>
+          <div class="delete-confirm" *ngIf="confirmDeleteId === reservation.id"><span>¿Eliminar?</span><button type="button" (click)="deleteReservation()">Sí</button><button type="button" (click)="confirmDeleteId = null">No</button></div>
+        </article>
+      </div>
+      <ng-template #noReservations><div class="empty-state"><span>◷</span><h3>No hay reservas con este filtro</h3><p>Cuando un paciente reserve, aparecerá aquí para que puedas gestionarlo.</p></div></ng-template>
+    </section>
+
+    <section class="catalog-section" id="servicios">
+      <div class="catalog-form">
+        <div class="eyebrow">Catálogo</div><h2>{{ editingServiceId === null ? 'Agregar servicio' : 'Editar servicio' }}</h2><p>Define las atenciones que los pacientes pueden reservar.</p>
+        <form [formGroup]="serviceForm" (ngSubmit)="createService()">
+          <label>Nombre<input formControlName="name" placeholder="Evaluación deportiva"></label>
+          <label>Descripción<textarea formControlName="description" rows="3" placeholder="Describe la atención"></textarea></label>
+          <label>Duración en minutos<input formControlName="durationMinutes" type="number" min="1"></label>
+          <button class="dark-button" type="submit">{{ editingServiceId === null ? 'Agregar al catálogo' : 'Guardar cambios' }} <span>↗</span></button>
+          <button class="text-button" *ngIf="editingServiceId !== null" type="button" (click)="cancelEditService()">Cancelar edición</button>
+        </form>
+      </div>
+      <div class="catalog-list"><div class="section-top"><div><div class="eyebrow">Servicios activos</div><h2>Tu catálogo</h2></div><span class="catalog-count">{{ services.length }}</span></div>
+        <article *ngFor="let service of services"><span class="catalog-icon">✦</span><div><strong>{{ service.name }}</strong><small>{{ service.durationMinutes }} min · {{ service.description }}</small></div><button type="button" (click)="editService(service)">Editar</button><button type="button" (click)="deleteService(service)">Eliminar</button></article>
+      </div>
+    </section>
+  </main>
+</div>

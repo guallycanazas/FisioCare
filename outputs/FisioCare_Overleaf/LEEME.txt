@@ -1,0 +1,10 @@
+Proyecto Overleaf de FisioCare
+
+1. Sube todos los archivos de esta carpeta a tu proyecto de Overleaf.
+2. Abre main.tex.
+3. En Menu > Compiler selecciona XeLaTeX.
+4. La portada usa `cibertec-logo-png_seeklogo-315758.png`, que ya está en la plantilla original de Overleaf. Si creas un proyecto nuevo, sube también ese archivo.
+5. Completa los campos de docente e integrantes.
+6. Compila con Recompile.
+
+La estructura visual sigue la plantilla del proyecto anterior: Noto Serif para el texto, Lato para títulos, colores Cibertec, encabezados, pies de página, índice y capítulos.

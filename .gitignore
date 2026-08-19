@@ -1,0 +1,12 @@
+.idea/
+.vscode/
+*.iml
+target/
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+work/
+.vercel/
+frontend/src/app/* 2.html

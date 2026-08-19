@@ -1,0 +1,373 @@
+% !TeX program = xelatex
+% Informe de Proyecto - FisioCare
+% Plantilla adaptada del proyecto de Overleaf del curso
+
+\documentclass[12pt,a4paper,oneside]{report}
+
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Lato}
+\setmonofont{DejaVu Sans Mono}
+\usepackage[a4paper,top=2.5cm,bottom=2.4cm,left=2.7cm,right=2.5cm,headheight=16pt]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{caption}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,fit,calc}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{url}
+\usepackage{ragged2e}
+\usepackage[most]{tcolorbox}
+
+\definecolor{CibertecBlue}{HTML}{123B63}
+\definecolor{CibertecLight}{HTML}{EAF1F7}
+\definecolor{CibertecAccent}{HTML}{2E74B5}
+\definecolor{TextGray}{HTML}{4D4D4D}
+\definecolor{LightGray}{HTML}{F3F5F7}
+\definecolor{LineGray}{HTML}{C9D2DA}
+\definecolor{CibertecInk}{HTML}{23384D}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=CibertecBlue,
+  urlcolor=CibertecAccent,
+  citecolor=CibertecBlue,
+  pdftitle={FisioCare - Plataforma web para reservas de fisioterapia},
+  pdfauthor={Equipo FisioCare},
+  pdfsubject={Proyecto de Investigación Aplicada}
+}
+\urlstyle{same}
+
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.22}
+\setlist[itemize]{leftmargin=1.1cm,itemsep=2pt,topsep=4pt}
+\setlist[enumerate]{leftmargin=1.1cm,itemsep=2pt,topsep=4pt}
+\renewcommand{\labelitemi}{\textcolor{CibertecAccent}{\small\textbullet}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{CibertecInk}Informe de Proyecto - FisioCare}
+\fancyhead[R]{\small\sffamily\bfseries\color{CibertecBlue}CIBERTEC}
+\fancyfoot[L]{\small\sffamily\color{TextGray}Computación e Informática}
+\fancyfoot[R]{\small\sffamily\color{TextGray}Página \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[L]{\small\sffamily\color{CibertecInk}Informe de Proyecto - FisioCare}
+  \fancyhead[R]{\small\sffamily\bfseries\color{CibertecBlue}CIBERTEC}
+  \fancyfoot[L]{\small\sffamily\color{TextGray}Computación e Informática}
+  \fancyfoot[R]{\small\sffamily\color{TextGray}Página \thepage}
+  \renewcommand{\headrulewidth}{0.5pt}
+  \renewcommand{\footrulewidth}{0.5pt}
+}
+
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\bfseries\color{CibertecBlue}}
+  {\fontsize{14}{16}\selectfont CAPÍTULO \thechapter}
+  {6pt}
+  {\fontsize{18}{22}\selectfont\MakeUppercase}
+  [\vspace{6pt}\color{CibertecAccent}\titlerule]
+\titlespacing*{\chapter}{0pt}{-18pt}{24pt}
+\titleformat{\section}{\normalfont\sffamily\bfseries\large\color{CibertecBlue}}{\thesection.}{0.6em}{}[\vspace{2pt}{\color{CibertecLight}\titlerule}]
+\titleformat{\subsection}{\normalfont\sffamily\bfseries\normalsize\color{CibertecAccent}}{\thesubsection.}{0.6em}{}
+\titleformat{\subsubsection}{\normalfont\sffamily\bfseries\normalsize\color{TextGray}}{}{0em}{}
+\renewcommand{\contentsname}{ÍNDICE}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+\renewcommand{\cftchapfont}{\bfseries\sffamily\color{CibertecBlue}}
+\renewcommand{\cftchappagefont}{\bfseries\color{CibertecBlue}}
+\renewcommand{\cftsecfont}{\sffamily}
+\renewcommand{\cftsubsecfont}{\sffamily\small}
+\setlength{\cftbeforechapskip}{7pt}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\source}[1]{\par\noindent{\footnotesize\textcolor{TextGray}{#1}}\par}
+\newcommand{\ciberteclogo}{cibertec-logo-png_seeklogo-315758.png}
+\newtcolorbox{projectsummary}{
+  enhanced,breakable,
+  colback=CibertecLight,colframe=CibertecAccent,
+  boxrule=0.7pt,arc=4pt,
+  left=12pt,right=12pt,top=10pt,bottom=10pt,
+  title={Resumen ejecutivo},
+  fonttitle=\sffamily\bfseries\color{CibertecBlue},
+  coltitle=CibertecBlue
+}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[CibertecBlue] (current page.north west) rectangle ([xshift=2.8cm]current page.south west);
+  \fill[CibertecAccent] ([xshift=2.8cm]current page.north west) rectangle ([xshift=3.05cm]current page.south west);
+  \fill[CibertecLight] ([xshift=3.05cm,yshift=-1.3cm]current page.north west)
+    rectangle (current page.north east);
+  \fill[CibertecAccent] ([xshift=3.05cm,yshift=-1.3cm]current page.north west)
+    rectangle ([xshift=3.05cm,yshift=-1.38cm]current page.north east);
+\end{tikzpicture}
+
+\hspace*{1.1cm}
+\begin{minipage}{0.82\textwidth}
+\centering
+\vspace*{0.55cm}
+\IfFileExists{\ciberteclogo}{\includegraphics[width=5.4cm]{\ciberteclogo}\par}{\sffamily\bfseries\Large\color{CibertecBlue}CIBERTEC\par}
+\vspace{0.65cm}
+{\sffamily\small\color{CibertecAccent}\MakeUppercase{Carrera profesional: Computación e Informática}\par}
+\vspace{1.25cm}
+{\sffamily\bfseries\color{CibertecBlue}\fontsize{32}{38}\selectfont FISIOCARE\par}
+\vspace{0.35cm}
+{\sffamily\color{TextGray}\fontsize{15}{20}\selectfont Plataforma web para la gestión\par}
+{\sffamily\color{TextGray}\fontsize{15}{20}\selectfont de reservas de fisioterapia\par}
+\vspace{0.8cm}
+\begin{tcolorbox}[width=0.92\textwidth,colback=CibertecBlue,colframe=CibertecBlue,boxrule=0pt,arc=3pt,left=10pt,right=10pt,top=8pt,bottom=8pt]
+\centering\sffamily\bfseries\color{white}\large Proyecto de Investigación Aplicada
+\end{tcolorbox}
+\vspace{0.7cm}
+{\sffamily\bfseries\color{CibertecBlue}\large Desarrollo de Aplicaciones Web I (4694)\par}
+\vspace{0.15cm}
+{\sffamily\color{TextGray}\normalsize Quinto ciclo \textbullet\ Semestre 2026-I\par}
+\vfill
+\begin{tcolorbox}[width=0.96\textwidth,colback=LightGray,colframe=LineGray,boxrule=0.6pt,arc=3pt,left=12pt,right=12pt,top=10pt,bottom=10pt]
+\begin{tabularx}{\textwidth}{@{}p{3.1cm}Y@{}}
+\textcolor{CibertecBlue}{\sffamily\bfseries Docente} & Berrio Huamani, Miguel Angel\\[7pt]
+\textcolor{CibertecBlue}{\sffamily\bfseries Alumnos} & Alcarraz Ortiz, Angel Máximo\\
+& Canazas Rosas, Willian Roy
+\end{tabularx}
+\end{tcolorbox}
+\vfill
+{\sffamily\color{TextGray}\small Lima, Perú \textbullet\ 2026\par}
+\end{minipage}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+\chapter{Proyecto de Investigación}
+
+\section{Resumen}
+\begin{projectsummary}
+FisioCare es una aplicación web empresarial para organizar la reserva y el seguimiento de sesiones de fisioterapia. Permite que el paciente conozca los servicios, cree una cuenta, inicie sesión con correo o Google, registre una reserva y revise su estado. El administrador gestiona la agenda, confirma o rechaza solicitudes, cancela o elimina registros y administra el catálogo.
+
+El backend se construyó con Java y Spring Boot, Spring MVC, Spring Data JPA y Spring Security. El frontend se desarrolló con Angular y consume una API REST. PostgreSQL persiste usuarios, servicios y reservas. Las contraseñas locales se protegen mediante hashing BCrypt y el acceso se gestiona con JWT. Docker Compose permite ejecutar la solución completa.
+\end{projectsummary}
+
+\section{Introducción}
+La coordinación de una atención fisioterapéutica puede involucrar mensajes dispersos, confirmaciones manuales y poca visibilidad del estado de cada solicitud. FisioCare centraliza el proceso en una plataforma web responsive con flujos diferenciados para pacientes y administradores.
+
+El proyecto busca facilitar el acceso a los servicios de rehabilitación y reducir el trabajo manual asociado a la agenda. El impacto esperado es una atención más ordenada, trazable y accesible para una clínica o consultorio de fisioterapia.
+
+\section{Diagnóstico: análisis SEPTE}
+El análisis SEPTE prioriza las variables Social, Tecnológica y Política/Legal, porque son las que se relacionan directamente con la oportunidad de mejora.
+
+\begin{longtable}{|p{2.4cm}|p{7.0cm}|p{6.0cm}|}
+\caption{Análisis SEPTE aplicado a FisioCare}\label{tab:septe}\\
+\hline
+\rowcolor{CibertecBlue}\color{white}\textbf{Variable} & \color{white}\textbf{Hallazgo y evidencia} & \color{white}\textbf{Implicación para FisioCare}\\
+\hline
+\endfirsthead
+\hline
+\rowcolor{CibertecBlue}\color{white}\textbf{Variable} & \color{white}\textbf{Hallazgo y evidencia} & \color{white}\textbf{Implicación para FisioCare}\\
+\hline
+\endhead
+\rowcolor{CibertecLight}
+Social & La OMS estima que 2,4 mil millones de personas viven con una condición que podría beneficiarse de rehabilitación.\footnote{OMS, ``Rehabilitación'', 2024. \url{https://www.who.int/es/news-room/fact-sheets/detail/rehabilitation}} & Facilitar la solicitud de cita, mostrar estados y orientar el siguiente paso. Riesgo: brecha de acceso, baja alfabetización digital o abandono.\\ \hline
+Tecnológica & El INEI reportó acceso a Internet en hogares del país y una diferencia importante entre Lima Metropolitana y el área rural.\footnote{INEI, ``Las Tecnologías de Información y Comunicación en los Hogares'', II trimestre 2024. \url{https://www.inei.gob.pe/media/MenuRecursivo/boletines/boletin_tic_iit24.pdf}} & Interfaz responsive, ligera y usable desde celular. Riesgo: conectividad desigual y dependencia del backend.\\ \hline
+Política / legal & La Ley N.° 29733 protege el derecho fundamental a la protección de datos personales en Perú.\footnote{Congreso de la República del Perú, Ley N.° 29733. \url{https://www.gob.pe/institucion/congreso-de-la-republica/normas-legales/243470-29733}} & Autenticación, autorización por roles y hash de contraseñas. Riesgo: exposición de datos si se despliega sin HTTPS y controles.\\ \hline
+\end{longtable}
+
+\section{Objetivos}
+\subsection{Objetivo general}
+Desarrollar una aplicación web empresarial que centralice la reserva y gestión de sesiones de fisioterapia mediante un backend Java con Spring Framework, una API REST persistente y un frontend Angular.
+
+\subsection{Objetivos específicos SMART}
+\begin{enumerate}
+\item Implementar antes de la sustentación final una API REST protegida que permita autenticar usuarios, gestionar servicios y ejecutar GET, POST, PUT y DELETE sobre recursos persistidos en PostgreSQL.
+\item Validar antes de la entrega final las operaciones de insertar, actualizar, eliminar y listar mediante pruebas automatizadas de la capa de acceso a datos.
+\item Permitir que un paciente registre una reserva y consulte su estado, y que un administrador la confirme, rechace, cancele o elimine desde el panel de gestión.
+\end{enumerate}
+
+\section{Justificación del proyecto}
+FisioCare transforma un proceso sensible a errores en un flujo digital trazable. La reserva conserva paciente, servicio, fecha, estado y responsable de la gestión. La separación entre Angular, Spring Boot, JPA y PostgreSQL permite mantener y probar el sistema.
+
+\subsection{Beneficiarios directos}
+\begin{itemize}
+\item Pacientes que desean consultar servicios y registrar una cita desde una landing page.
+\item Personal administrativo o fisioterapeutas que gestionan la agenda en un panel.
+\item Equipo desarrollador que aplica Spring, Angular, REST, seguridad, pruebas y Docker.
+\end{itemize}
+
+\subsection{Beneficiarios indirectos}
+\begin{itemize}
+\item Familiares o acompañantes que apoyan la coordinación de citas.
+\item La clínica o consultorio, al disponer de información ordenada para mejorar su atención.
+\end{itemize}
+
+\section{Definición y alcance}
+El sistema cubre el flujo desde la presentación del servicio hasta la gestión de una reserva. Incluye registro e inicio de sesión local, login opcional con Google OAuth2, autorización por roles CUSTOMER y ADMIN, catálogo de servicios, disponibilidad básica, creación y consulta de reservas, confirmación, rechazo, cancelación y eliminación.
+
+No incluye historia clínica, diagnóstico médico, pagos en línea, videollamadas, notificaciones por correo ni facturación. Estas funciones se consideran extensiones futuras.
+
+\subsection{Arquitectura y tecnologías}
+\rowcolors{2}{CibertecLight}{white}
+\begin{tabularx}{\textwidth}{|p{3cm}|p{4.2cm}|Y|}
+\hline
+\rowcolor{CibertecBlue}\color{white}\textbf{Capa} & \color{white}\textbf{Tecnología} & \color{white}\textbf{Responsabilidad}\\
+\hline
+Frontend & Angular & Landing, autenticación, reserva, cuenta del paciente y panel administrador.\\ \hline
+Backend & Java 17 + Spring Boot & Controladores REST, validaciones, reglas, seguridad y JWT.\\ \hline
+Persistencia & Spring Data JPA + PostgreSQL & Usuarios, servicios y reservas.\\ \hline
+Seguridad & Spring Security + BCrypt + OAuth2/OIDC & Roles, hash de contraseñas, JWT y Google.\\ \hline
+Ejecución & Docker Compose & Contenedores para frontend, backend y base de datos.\\ \hline
+\end{tabularx}
+\rowcolors{1}{white}{white}
+
+\subsection{Endpoints REST principales}
+\rowcolors{2}{CibertecLight}{white}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{5.2cm}|Y|}
+\hline
+\rowcolor{CibertecBlue}\color{white}\textbf{Método} & \color{white}\textbf{Endpoint} & \color{white}\textbf{Uso}\\
+\hline
+POST & /api/auth/register & Registrar usuario con contraseña protegida mediante BCrypt.\\ \hline
+POST & /api/auth/login & Autenticar y emitir JWT.\\ \hline
+GET & /api/auth/me & Consultar el usuario autenticado.\\ \hline
+GET & /api/auth/providers & Consultar proveedores de autenticación disponibles.\\ \hline
+GET & /api/services & Listar servicios disponibles.\\ \hline
+POST & /api/services & Crear servicio como administrador.\\ \hline
+PUT & /api/services/\{id\} & Actualizar servicio.\\ \hline
+DELETE & /api/services/\{id\} & Eliminar servicio.\\ \hline
+GET & /api/reservations & Listar reservas como administrador.\\ \hline
+GET & /api/reservations/mine & Listar reservas del paciente autenticado.\\ \hline
+GET & /api/reservations/availability & Consultar disponibilidad por servicio y fecha.\\ \hline
+POST & /api/reservations & Crear reserva.\\ \hline
+PUT & /api/reservations/\{id\} & Reprogramar reserva.\\ \hline
+PATCH & /api/reservations/\{id\}/status & Confirmar o rechazar una reserva.\\ \hline
+PATCH & /api/reservations/\{id\}/cancel & Cancelar una reserva.\\ \hline
+DELETE & /api/reservations/\{id\} & Eliminar reserva.\\ \hline
+\end{tabularx}
+\rowcolors{1}{white}{white}
+
+\section{Productos y entregables}
+\begin{itemize}
+\item Código fuente del backend, frontend y configuración Docker Compose.
+\item Base de datos PostgreSQL persistida mediante volumen Docker.
+\item Informe de proyecto en formato editable.
+\item Presentación para la exposición.
+\item Guion estructurado para video demo de 3 a 5 minutos.
+\item Pruebas automatizadas de persistencia y evidencias de build.
+\end{itemize}
+
+\section{Conclusiones}
+\begin{enumerate}
+\item La solución integra Spring Boot y Angular mediante servicios REST persistentes, con operaciones GET, POST, PUT y DELETE.
+\item La separación de roles y el uso de BCrypt y JWT fortalecen el control de acceso; OAuth2 agrega una alternativa conveniente.
+\item La digitalización de la agenda mejora la trazabilidad y deja una base para incorporar notificaciones, pagos e historia clínica.
+\end{enumerate}
+
+\section{Recomendaciones}
+\begin{enumerate}
+\item Desplegar con HTTPS, secretos administrados por el proveedor cloud y una política de privacidad antes de usar datos reales.
+\item Incorporar pruebas de integración REST y pruebas end-to-end del flujo paciente-administrador.
+\item Agregar recordatorios, disponibilidad por profesional y calendario externo después de validar el proceso operativo.
+\end{enumerate}
+
+\clearpage
+\section{Glosario}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash\bfseries}p{3.7cm}|Y|}
+\hline
+\rowcolor{CibertecBlue}\color{white}\textbf{Término} & \color{white}\textbf{Definición}\\
+\hline
+API REST & Interfaz que expone recursos mediante HTTP y métodos GET, POST, PUT y DELETE.\\
+\hline
+Angular & Framework frontend basado en TypeScript.\\
+\hline
+BCrypt & Algoritmo de hashing adaptativo usado para proteger contraseñas.\\
+\hline
+Docker Compose & Herramienta que coordina los contenedores del frontend, backend y base de datos.\\
+\hline
+JWT & JSON Web Token firmado que transporta identidad y permisos.\\
+\hline
+OAuth2/OIDC & OAuth2 delega la autorización y OIDC añade identidad sobre ese flujo, como en el acceso con Google.\\
+\hline
+JPA & Especificación Java para mapear objetos a tablas.\\
+\hline
+PostgreSQL & Sistema gestor de base de datos relacional usado para persistir usuarios, servicios y reservas.\\
+\hline
+CRUD & Crear, leer, actualizar y eliminar información.\\
+\hline
+Reserva & Solicitud de atención asociada a un paciente, servicio, fecha y estado.\\
+\hline
+\end{tabularx}
+
+\clearpage
+\section{Bibliografía}
+\begin{enumerate}[label={\textcolor{CibertecAccent}{[\arabic*]}},leftmargin=1.1cm,itemsep=7pt]
+\item Organización Mundial de la Salud. (2024). \textit{Rehabilitación}. \url{https://www.who.int/es/news-room/fact-sheets/detail/rehabilitation}
+\item Instituto Nacional de Estadística e Informática. (2024). \textit{Las Tecnologías de Información y Comunicación en los Hogares}. \url{https://www.inei.gob.pe/estadisticas/indice-tematico/tecnologias-de-la-informacion-y-telecomunicaciones/}
+\item Congreso de la República del Perú. \textit{Ley N.° 29733, Ley de Protección de Datos Personales}. \url{https://www.gob.pe/institucion/congreso-de-la-republica/normas-legales/243470-29733}
+\item Spring. \textit{Spring Boot Reference Documentation}. \url{https://docs.spring.io/spring-boot/reference/}
+\item Angular. \textit{Angular Documentation}. \url{https://angular.dev/}
+\end{enumerate}
+
+\appendix
+\chapter{Anexos}
+\section{Evidencia técnica de cumplimiento}
+\rowcolors{2}{CibertecLight}{white}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.8cm}|Y|>{\centering\arraybackslash}p{3.0cm}|}
+\hline
+\rowcolor{CibertecBlue}\color{white}\textbf{Criterio} & \color{white}\textbf{Evidencia en FisioCare} & \color{white}\textbf{Estado}\\
+\hline
+Login REST y BCrypt & AuthController, PasswordEncoder y usuarios en PostgreSQL. & Implementado\\
+\hline
+Operaciones REST & BookingServiceController y ReservationController. & Implementado\\
+\hline
+Consumo REST desde Angular & BookingApiService con GET, POST, PUT, PATCH y DELETE. & Implementado\\
+\hline
+Persistencia & Entidades JPA y repositorios. & Implementado\\
+\hline
+Pruebas de datos & ReservationRepositoryDataTest: insertar, listar, actualizar y eliminar. & Implementado\\
+\hline
+Contenedores & compose.yaml con frontend, backend y PostgreSQL. & Implementado\\
+\hline
+\end{tabularx}
+\rowcolors{1}{white}{white}
+
+\section{Credenciales de demostración local}
+Administrador: \texttt{admin@reservas.local} / \texttt{Admin123!}.\\
+Cliente demo: \texttt{cliente@reservas.local} / \texttt{Cliente123!}.\\
+\textcolor{TextGray}{\small Estas credenciales son únicamente para la demostración local y no deben utilizarse en producción.}
+
+\section{Guion resumido del video demo}
+{\small
+\begin{enumerate}[itemsep=1pt,topsep=2pt]
+\item Presentar el problema y la propuesta FisioCare (30 segundos).
+\item Mostrar landing, servicios y Reservar cita (40 segundos).
+\item Registrar una reserva y mostrar Mi cuenta (60 segundos).
+\item Gestionar la reserva y editar un servicio como administrador (80 segundos).
+\item Mostrar Docker, API REST y pruebas Maven; cerrar con conclusiones (40 segundos).
+\end{enumerate}
+}
+
+\end{document}
