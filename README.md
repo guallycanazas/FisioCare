@@ -1,101 +1,148 @@
-# FisioCare - Centro de fisioterapia y rehabilitación
+# FisioCare
 
-Sistema web de reservas de fisioterapia y rehabilitación, construido con Spring Boot, Angular, PostgreSQL, Docker y JWT.
+Sistema web de reservas para un centro de fisioterapia y rehabilitación. Permite que los pacientes conozcan los servicios, creen una cuenta, reserven una sesión y consulten su historial. El personal administrativo gestiona la agenda, confirma o rechaza solicitudes y mantiene el catálogo de servicios.
 
-## Flujo de la aplicación
+![FisioCare](frontend/public/fisiocare-mark.svg)
 
-- Landing pública con servicios, método de atención y llamadas a la acción.
-- Páginas independientes para iniciar sesión, registrarse y reservar.
-- Cuenta del paciente con próxima sesión, estadísticas, historial y cancelación inline.
-- Panel administrativo con filtros por estado, búsqueda, confirmación, rechazo y eliminación sin ventanas emergentes.
-- Registro e inicio de sesión de clientes.
-- Autenticación JWT y contraseñas protegidas con BCrypt.
-- Roles `ADMIN` y `CUSTOMER`.
-- Catálogo de servicios reservables.
-- Creación, historial y cancelación de reservas.
-- Reprogramación de reservas mediante `PUT`.
-- Confirmación, rechazo y consulta global para administradores.
-- Edición de servicios mediante `PUT` desde el catálogo administrativo.
-- Control de disponibilidad básica por servicio y horario.
-- API REST en Spring Boot.
-- Interfaz Angular servida por Nginx.
-- PostgreSQL ejecutado con Docker Compose.
+## Stack tecnológico
 
-## Rutas principales
+| Capa | Tecnología | Uso en el proyecto |
+| --- | --- | --- |
+| Frontend | Angular + TypeScript | Landing, autenticación, reservas y paneles |
+| Estilos | CSS responsive | Sistema visual, componentes y adaptación móvil |
+| Backend | Spring Boot 3.3 + Java 17 | API REST y reglas de negocio |
+| Seguridad | Spring Security, JWT y BCrypt | Sesiones, roles y protección de contraseñas |
+| Identidad opcional | OAuth 2.0 / OpenID Connect con Google | Continuar con Google |
+| Persistencia | Spring Data JPA + PostgreSQL | Usuarios, servicios y reservas |
+| Contenedores | Docker Compose | Frontend, backend y base de datos |
+| Servidor web | Nginx | Sirve Angular y enruta `/api` al backend |
+| Automatización | GitHub Actions | Build del frontend y pruebas del backend |
 
-- `/` — Landing pública.
-- `/reservar` — Flujo de reserva paso a paso.
-- `/login` y `/registro` — Acceso seguro en páginas propias.
-- `/mi-cuenta` — Panel del paciente.
-- `/admin` — Agenda y catálogo del administrador.
+## Funcionalidades
 
-## Google OAuth2 opcional
+- Landing pública con identidad visual de FisioCare, servicios y llamados a la acción.
+- Registro e inicio de sesión con JWT.
+- Acceso opcional con Google OAuth 2.0/OIDC.
+- Roles `CUSTOMER` y `ADMIN`.
+- Reserva de sesiones con fecha, hora y servicio.
+- Panel del paciente con próximas sesiones, historial y cancelación.
+- Panel administrativo con búsqueda, filtros, confirmación, rechazo y eliminación.
+- CRUD de servicios y reservas.
+- Validación de disponibilidad básica.
+- Diseño responsive para escritorio y móvil.
 
-El login tradicional con JWT continúa disponible. Para activar el botón `Continuar con Google`, copia `.env.example` como `.env`, completa las credenciales de Google y cambia `GOOGLE_OAUTH_ENABLED` a `true`:
+## Estructura
+
+```text
+.
+├── frontend/       # Angular + Nginx
+├── backend/        # Spring Boot + Java 17
+├── compose.yaml    # Frontend, backend y PostgreSQL
+├── .env.example    # Variables de configuración, sin secretos
+└── .github/        # Integración continua
+```
+
+## Ejecutar con Docker
+
+Requisitos: Docker Desktop.
+
+```bash
+cp .env.example .env
+docker compose up -d --build
+```
+
+URLs locales:
+
+- Aplicación: <http://localhost:4200>
+- API: <http://localhost:8081>
+- Salud de la API: <http://localhost:8081/api/health>
+
+Para detener los contenedores:
+
+```bash
+docker compose down
+```
+
+La base de datos usa el volumen `postgres_data`, por lo que sus datos se conservan mientras no se elimine ese volumen.
+
+## Variables de entorno
+
+Completa `.env` solo en tu equipo. Nunca publiques ese archivo:
 
 ```env
-GOOGLE_OAUTH_ENABLED=true
-GOOGLE_CLIENT_ID=tu-client-id
-GOOGLE_CLIENT_SECRET=tu-client-secret
+GOOGLE_OAUTH_ENABLED=false
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+FRONTEND_URL=http://localhost:4200
 ```
 
-En Google Cloud Console registra esta URL de redirección para desarrollo:
-`http://localhost:8081/login/oauth2/code/google`
+En un entorno público también deben configurarse un `JWT_SECRET` fuerte, una contraseña segura para PostgreSQL y la URL pública del frontend. Las credenciales privadas de demostración no se muestran en la interfaz ni en este README.
 
-Después ejecuta `docker compose up -d --build`. Spring Security usa el cliente OAuth2/OIDC de Google y, al volver a FisioCare, la aplicación emite su JWT interno para proteger la API.
+## Google OAuth 2.0
 
-## Ejecutar todo con Docker
+Para activar el botón **Continuar con Google**:
 
-```bash
-docker compose up --build
+1. Crea un cliente OAuth de tipo aplicación web en Google Cloud.
+2. Configura `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` y `GOOGLE_OAUTH_ENABLED=true`.
+3. Registra la URI de retorno correspondiente al entorno:
+
+```text
+http://localhost:8081/login/oauth2/code/google
 ```
 
-La aplicación queda disponible en `http://localhost:4200` y la API en `http://localhost:8081`.
+En un túnel o dominio público, reemplaza el host por la URL pública. Por ejemplo:
 
-## Usuarios demo
-
-- Administrador: `admin@reservas.local` / `Admin123!`
-- Cliente: `cliente@reservas.local` / `Cliente123!`
-
-## Ejecutar solo el backend en local
-
-Requisitos: Java 17 y Maven.
-
-```bash
-cd backend
-mvn spring-boot:run
+```text
+https://tu-dominio.com/login/oauth2/code/google
 ```
 
-Antes, inicia PostgreSQL con `docker compose up -d db`. La API queda disponible en `http://localhost:8080` cuando se ejecuta fuera de Docker.
+## API principal
 
-## Endpoints iniciales
+| Método | Ruta | Acceso |
+| --- | --- | --- |
+| `GET` | `/api/health` | Público |
+| `POST` | `/api/auth/register` | Público |
+| `POST` | `/api/auth/login` | Público |
+| `GET` | `/api/auth/providers` | Público |
+| `GET` | `/api/services` | Público |
+| `POST` | `/api/reservations` | Cliente autenticado |
+| `GET` | `/api/reservations/mine` | Cliente autenticado |
+| `PATCH` | `/api/reservations/{id}/cancel` | Cliente propietario |
+| `GET` | `/api/reservations` | Administrador |
+| `PATCH` | `/api/reservations/{id}/status` | Administrador |
+| `PUT` | `/api/reservations/{id}` | Administrador |
+| `DELETE` | `/api/reservations/{id}` | Administrador |
+| `POST/PUT/DELETE` | `/api/services` | Administrador |
 
-- `GET /api/health`
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `GET /api/auth/providers`
-- `GET /api/auth/me`
-- `GET /api/services`
-- `POST /api/services` (administrador)
-- `PUT /api/services/{id}` (administrador)
-- `DELETE /api/services/{id}` (administrador)
-- `GET /api/reservations/mine` (cliente)
-- `GET /api/reservations` (administrador)
-- `POST /api/reservations` (cliente)
-- `PUT /api/reservations/{id}` (administrador)
-- `PATCH /api/reservations/{id}/cancel` (cliente propietario)
-- `PATCH /api/reservations/{id}/status` (administrador)
-- `DELETE /api/reservations/{id}` (administrador)
+## Pruebas y build
 
-## Pruebas
-
-Las pruebas de persistencia cubren insertar, listar, actualizar estado, reprogramar y eliminar reservas:
+Backend:
 
 ```bash
 cd backend
 mvn test
 ```
 
-## Despliegue cloud
+Frontend:
 
-El proyecto está preparado para cualquier plataforma que ejecute Docker Compose o imágenes Docker. En producción se deben cambiar `JWT_SECRET`, `DB_PASSWORD` y `DB_URL` por variables de entorno seguras, usar una base de datos administrada y activar HTTPS.
+```bash
+cd frontend
+npm ci
+npm run build -- --configuration production
+```
+
+GitHub Actions ejecuta automáticamente estas validaciones en cada cambio de la rama `main`.
+
+## Compartir temporalmente desde tu Mac
+
+Con Docker levantado, puedes crear una URL pública temporal sin abrir puertos del router:
+
+```bash
+cloudflared tunnel --url http://localhost:4200
+```
+
+La URL solo funciona mientras Docker y el túnel estén activos. Para producción se recomienda desplegar el frontend, backend y PostgreSQL en servicios administrados, con HTTPS, variables secretas y un dominio propio.
+
+## Repositorio
+
+<https://github.com/guallycanazas/FisioCare>

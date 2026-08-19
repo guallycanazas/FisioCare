@@ -45,5 +45,4 @@ label small { color: #b45451; font-size: .68rem; }
 .security-note p { display: grid; gap: .2rem; margin: 0; }
 .security-note strong { color: #363452; font-size: .72rem; }
 .security-note small { color: #858798; font-size: .66rem; }
-.demo-note { margin-top: 1.1rem; color: #a0a1af; font-size: .66rem; text-align: center; }
 @media (max-width: 800px) { .auth-page { grid-template-columns: 1fr; } .auth-visual { display: none; } .auth-content { min-height: 100vh; padding: 1.5rem; } .auth-card > app-brand-logo { display: inline-block; } }
