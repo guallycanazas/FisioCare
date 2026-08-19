@@ -15,9 +15,9 @@
 
 ## Sobre el proyecto
 
-FisioCare es una aplicación web desarrollada para el curso de Desarrollo de Aplicaciones Web I. La idea del proyecto es digitalizar el proceso de reserva de un centro de fisioterapia, desde la presentación de los servicios hasta la confirmación y seguimiento de una cita.
+En este proyecto desarrollé FisioCare, una aplicación web para el curso de Desarrollo de Aplicaciones Web I. La idea es digitalizar el proceso de reserva de un centro de fisioterapia, desde la presentación de los servicios hasta la confirmación y el seguimiento de una cita.
 
-En el sistema, un paciente puede registrarse, iniciar sesión, revisar los servicios disponibles, reservar un horario y consultar sus reservas. También se implementó un panel administrativo para revisar solicitudes, confirmar o rechazar citas y administrar el catálogo de servicios.
+La aplicación permite que un paciente se registre, inicie sesión, revise los servicios disponibles, reserve un horario y consulte sus reservas. También implementé un panel administrativo para revisar solicitudes, confirmar o rechazar citas y administrar el catálogo de servicios.
 
 ### Información académica
 
@@ -26,11 +26,10 @@ En el sistema, un paciente puede registrarse, iniciar sesión, revisar los servi
 | Carrera | Computación e Informática |
 | Curso | Desarrollo de Aplicaciones Web I |
 | Proyecto | FisioCare |
-| Autor | Canazas Rosas, Willian Roy |
 
 ### Objetivo
 
-Aplicar los conocimientos del curso en una solución completa, utilizando un frontend, una API REST, una base de datos relacional, autenticación y contenedores Docker.
+Mi objetivo fue aplicar los conocimientos del curso en una solución completa, utilizando un frontend, una API REST, una base de datos relacional, autenticación y contenedores Docker.
 
 ## Vista general
 
@@ -54,9 +53,9 @@ flowchart LR
     API --> DB[(PostgreSQL)]
 ```
 
-## Funcionalidades principales
+## Lo que implementé
 
-### Experiencia del paciente
+### Para el paciente
 
 - Landing pública con servicios, método de atención y llamados a la acción.
 - Registro e inicio de sesión en páginas independientes.
@@ -65,7 +64,7 @@ flowchart LR
 - Panel personal con próxima sesión, estadísticas e historial.
 - Cancelación de reservas pendientes.
 
-### Gestión administrativa
+### Para la administración
 
 - Panel protegido para personal autorizado.
 - Resumen de reservas pendientes, confirmadas y canceladas.
@@ -147,22 +146,16 @@ Los datos de PostgreSQL se conservan en el volumen `postgres_data` mientras no s
 
 ## Configuración segura
 
-Las variables privadas deben vivir únicamente en `.env`, que está excluido del repositorio:
+Las variables privadas las manejo únicamente en `.env`, que está excluido del repositorio:
 
 ```env
 GOOGLE_OAUTH_ENABLED=false
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 FRONTEND_URL=http://localhost:4200
-
-# Opcionales: cuentas semilla solo para tu entorno local
-DEMO_ADMIN_EMAIL=
-DEMO_ADMIN_PASSWORD=
-DEMO_CUSTOMER_EMAIL=
-DEMO_CUSTOMER_PASSWORD=
 ```
 
-En un entorno público configura además un `JWT_SECRET` fuerte, una contraseña segura de base de datos y la URL HTTPS real del frontend. No se publican credenciales demo en la interfaz, documentación ni código.
+En un entorno público también se debe configurar un `JWT_SECRET` fuerte, una contraseña segura para la base de datos y la URL HTTPS real del frontend.
 
 ## Google OAuth 2.0
 
@@ -221,7 +214,7 @@ GitHub Actions ejecuta el build de Angular y las pruebas Maven en cada cambio de
 
 ## Compartir desde mi máquina
 
-Para realizar una demostración temporal desde mi computadora puedo exponer el frontend local sin abrir puertos del router:
+Para una demostración temporal, desde mi computadora puedo exponer el frontend local sin abrir puertos del router:
 
 ```bash
 cloudflared tunnel --url http://localhost:4200
