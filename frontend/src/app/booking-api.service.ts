@@ -31,7 +31,7 @@ export interface AuthProviders {
 @Injectable({ providedIn: 'root' })
 export class BookingApiService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8081/api';
+  private readonly apiUrl = '/api';
 
   getAuthProviders(): Observable<AuthProviders> {
     return this.http.get<AuthProviders>(`${this.apiUrl}/auth/providers`);
