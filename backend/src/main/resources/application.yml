@@ -24,6 +24,11 @@ security:
 
 app:
   frontend-url: ${FRONTEND_URL:http://localhost:4200}
+  demo:
+    admin-email: ${DEMO_ADMIN_EMAIL:}
+    admin-password: ${DEMO_ADMIN_PASSWORD:}
+    customer-email: ${DEMO_CUSTOMER_EMAIL:}
+    customer-password: ${DEMO_CUSTOMER_PASSWORD:}
   oauth2:
     google:
       enabled: ${GOOGLE_OAUTH_ENABLED:false}

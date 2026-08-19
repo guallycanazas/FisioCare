@@ -74,9 +74,13 @@ GOOGLE_OAUTH_ENABLED=false
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 FRONTEND_URL=http://localhost:4200
+DEMO_ADMIN_EMAIL=
+DEMO_ADMIN_PASSWORD=
+DEMO_CUSTOMER_EMAIL=
+DEMO_CUSTOMER_PASSWORD=
 ```
 
-En un entorno público también deben configurarse un `JWT_SECRET` fuerte, una contraseña segura para PostgreSQL y la URL pública del frontend. Las credenciales privadas de demostración no se muestran en la interfaz ni en este README.
+En un entorno público también deben configurarse un `JWT_SECRET` fuerte, una contraseña segura para PostgreSQL y la URL pública del frontend. Las variables `DEMO_*` son opcionales, se configuran solo localmente y no deben publicarse.
 
 ## Google OAuth 2.0
 

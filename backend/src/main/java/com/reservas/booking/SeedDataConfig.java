@@ -8,6 +8,7 @@ import com.reservas.booking.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -43,21 +44,30 @@ public class SeedDataConfig {
     }
 
     @Bean
-    CommandLineRunner seedUsers(UserRepository repository, PasswordEncoder passwordEncoder) {
+    CommandLineRunner seedUsers(UserRepository repository,
+                                PasswordEncoder passwordEncoder,
+                                @Value("${app.demo.admin-email:}") String adminEmail,
+                                @Value("${app.demo.admin-password:}") String adminPassword,
+                                @Value("${app.demo.customer-email:}") String customerEmail,
+                                @Value("${app.demo.customer-password:}") String customerPassword) {
         return args -> {
             if (repository.count() == 0) {
-                repository.save(new AppUser(
-                        "Administrador",
-                        "admin@reservas.local",
-                        passwordEncoder.encode("Admin123!"),
-                        Role.ADMIN
-                ));
-                repository.save(new AppUser(
-                        "Cliente demo",
-                        "cliente@reservas.local",
-                        passwordEncoder.encode("Cliente123!"),
-                        Role.CUSTOMER
-                ));
+                if (!adminEmail.isBlank() && !adminPassword.isBlank()) {
+                    repository.save(new AppUser(
+                            "Administrador",
+                            adminEmail,
+                            passwordEncoder.encode(adminPassword),
+                            Role.ADMIN
+                    ));
+                }
+                if (!customerEmail.isBlank() && !customerPassword.isBlank()) {
+                    repository.save(new AppUser(
+                            "Cliente demo",
+                            customerEmail,
+                            passwordEncoder.encode(customerPassword),
+                            Role.CUSTOMER
+                    ));
+                }
             }
         };
     }
