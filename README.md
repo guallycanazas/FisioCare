@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/src/public/assets/fisiocare-logo.png" alt="Logo de FisioCare" width="128" />
   <h1>FisioCare</h1>
-  <p><strong>Recuperación con propósito.</strong><br>Plataforma web para gestionar servicios, pacientes y reservas de fisioterapia.</p>
+  <p><strong>Sistema web de reservas de fisioterapia</strong><br>Proyecto académico para organizar servicios, pacientes y citas en un solo lugar.</p>
 
   <a href="https://github.com/guallycanazas/FisioCare/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/guallycanazas/FisioCare/ci.yml?branch=main&style=flat-square&label=CI" alt="CI"></a>
   <img src="https://img.shields.io/badge/Angular-17%2B-dd0031?style=flat-square&logo=angular&logoColor=white" alt="Angular">
@@ -15,13 +15,22 @@
 
 ## Sobre el proyecto
 
-FisioCare nace para resolver un problema sencillo: una clínica de fisioterapia necesita recibir reservas, organizar su agenda y dar seguimiento a sus pacientes sin depender de mensajes dispersos o registros manuales.
+FisioCare es una aplicación web desarrollada para el curso de Desarrollo de Aplicaciones Web I. La idea del proyecto es digitalizar el proceso de reserva de un centro de fisioterapia, desde la presentación de los servicios hasta la confirmación y seguimiento de una cita.
 
-La solución reúne en un solo sistema una landing page informativa, autenticación, reserva de sesiones, seguimiento del paciente y un panel administrativo. El flujo está pensado para que una persona conozca el servicio, cree su cuenta, reserve una cita y pueda revisar su estado desde cualquier dispositivo.
+En el sistema, un paciente puede registrarse, iniciar sesión, revisar los servicios disponibles, reservar un horario y consultar sus reservas. También se implementó un panel administrativo para revisar solicitudes, confirmar o rechazar citas y administrar el catálogo de servicios.
+
+### Información académica
+
+| Dato | Información |
+| :--- | :--- |
+| Carrera | Computación e Informática |
+| Curso | Desarrollo de Aplicaciones Web I |
+| Proyecto | FisioCare |
+| Autor | Canazas Rosas, Willian Roy |
 
 ### Objetivo
 
-Construir una aplicación web segura, mantenible y desplegable con contenedores que digitalice la gestión de reservas de FisioCare y demuestre el uso integrado de Angular, Spring Boot, PostgreSQL, JWT, OAuth 2.0 y Docker.
+Aplicar los conocimientos del curso en una solución completa, utilizando un frontend, una API REST, una base de datos relacional, autenticación y contenedores Docker.
 
 ## Vista general
 
@@ -210,25 +219,15 @@ npm run build -- --configuration production
 
 GitHub Actions ejecuta el build de Angular y las pruebas Maven en cada cambio de `main`.
 
-## Compartir desde tu máquina
+## Compartir desde mi máquina
 
-Para una demostración temporal puedes exponer el frontend local sin abrir puertos del router:
+Para realizar una demostración temporal desde mi computadora puedo exponer el frontend local sin abrir puertos del router:
 
 ```bash
 cloudflared tunnel --url http://localhost:4200
 ```
 
-La URL pública funciona mientras Docker y el túnel estén activos. Para producción se recomienda usar un dominio propio, HTTPS permanente, variables secretas y una base de datos administrada.
-
-## Documentación adicional
-
-- [Informe del proyecto en Overleaf](outputs/FisioCare_Overleaf/LEEME.txt)
-- [Guion de demostración](outputs/Guion_Demo_FisioCare.md)
-- [Presentación de sustentación](outputs/FisioCare_Presentacion_Sustentacion.pptx)
-
-## Repositorio
-
-<https://github.com/guallycanazas/FisioCare>
+La URL pública funciona mientras Docker y el túnel estén activos. Para un despliegue permanente se necesitaría un dominio propio, HTTPS, variables secretas y una base de datos administrada.
 
 <div align="center">
   <sub>Desarrollado para Computación e Informática · FisioCare © 2026</sub>
