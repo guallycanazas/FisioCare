@@ -95,8 +95,7 @@ FisioCare/
 │   └── Dockerfile
 ├── frontend/
 │   ├── src/app/                # Landing, auth, reservas y dashboards
-│   ├── src/public/assets/      # Imágenes de la experiencia web
-│   ├── src/public/assets/      # Logo e imágenes de FisioCare
+│   ├── src/public/assets/      # Logo e imágenes de la experiencia web
 │   ├── nginx.conf              # Proxy frontend → backend
 │   └── Dockerfile
 ├── compose.yaml                # Servicios Docker
