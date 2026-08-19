@@ -10,3 +10,5 @@ dist/
 work/
 .vercel/
 frontend/src/app/* 2.html
+# Copias locales accidentales creadas durante la edición
+**/* 2.*
